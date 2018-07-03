@@ -1,6 +1,23 @@
 # VCode
 图片的验证码类，是常见的web需要功能
 
+# Installation
+    直接使用命令行
+        composer require edmmss/vcode:@dev -vvv
+    
+    或者编辑composer.json
+        在require里面加上
+            "edmmss/vcode": "@dev"
+        再加上
+        "repositories": [
+            {
+                "type": "git",
+                "url": "https://github.com/edmmss/VCode.git"
+            }
+        ]
+        
+        composer update edmmss/vcode -vvv
+        
 # demo
 
     <?php
