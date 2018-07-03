@@ -33,7 +33,7 @@ class VCode
     private $point = 1.8;// 每15平方像素一个干扰点
     private $arc = 1;// 每400平方像素-个干扰弧线
 
-    const DEFAULT_TTF_ARRAY = [
+    private $defaultTtfArray = [
         'segoescb.ttf',
         'Action_Jackson_Font_by_OhMyCraazyEditions.ttf',
         'Delicious-Bold.otf',
@@ -60,12 +60,8 @@ class VCode
      * @param $arr
      * @return bool
      */
-    public function setPm($arr)
+    public function setPm($arr = [])
     {
-        if (empty($arr)) {
-            return false;
-        }
-
         foreach ($arr as $key => $val) {
             $key = strtolower($key);
             if (in_array($key, $this->pmarr)) {
@@ -77,7 +73,7 @@ class VCode
             // 没有设置就用默认的
             $fonts = [];
             $fontsPath = $this->getFontsPath();
-            foreach (self::DEFAULT_TTF_ARRAY as $value) {
+            foreach ($this->defaultTtfArray as $value) {
                 $fonts[] = $fontsPath . $value;
             }
             $this->fontfiles = $fonts;
