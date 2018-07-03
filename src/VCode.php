@@ -34,9 +34,45 @@ class VCode
     private $arc = 400;// 每400平方像素-个干扰弧线
 
     // 构造方法
-    function __construct($arr = null)
+    function __construct()
     {
-        $this->setPm($arr);// 设置参数
+
+    }
+
+    /**
+     * 设置参数
+     *
+     * @date   2018/7/3
+     * @author edmmss
+     * @param $arr
+     * @return bool
+     */
+    public function setPm($arr)
+    {
+        if (empty($arr)) {
+            return false;
+        }
+        foreach ($arr as $key => $val) {
+            $key = strtolower($key);
+            if (in_array($key, $this->pmarr)) {
+                $this->$key = $val;
+            }
+        }
+    }
+
+    /**
+     * 获取字体的文件位置
+     *
+     * @date   2018/7/3
+     * @author edmmss
+     * @return mixed
+     */
+    public function getFontsPath()
+    {
+        $object = new \ReflectionObject($this);
+        $classFileName = $object->getFileName();
+
+        return str_replace('/VCode.php', '/new/', $classFileName);
     }
 
     /**
@@ -67,27 +103,6 @@ class VCode
         $this->createCode();// 生成验证码
         $this->createObstruct1();// 设置干扰元素
         $this->outputImg();// 输出图像并销毁
-    }
-
-    /**
-     * 设置参数
-     *
-     * @date   2018/7/3
-     * @author edmmss
-     * @param $arr
-     * @return bool
-     */
-    private function setPm($arr)
-    {
-        if (empty($arr)) {
-            return false;
-        }
-        foreach ($arr as $key => $val) {
-            $key = strtolower($key);
-            if (in_array($key, $this->pmarr)) {
-                $this->$key = $val;
-            }
-        }
     }
 
     /**
