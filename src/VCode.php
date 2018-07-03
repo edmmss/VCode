@@ -39,6 +39,13 @@ class VCode
         $this->setPm($arr);// 设置参数
     }
 
+    /**
+     * 获取验证码
+     *
+     * @date   2018/7/3
+     * @author edmmss
+     * @return null
+     */
     function getCode()
     {
         $this->makeCode();// 生成验证码
