@@ -1,0 +1,19 @@
+{
+    "name": "edmmss/vcode",
+    "description": "Image verification code class",
+    "type": "livrary",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "edmmss",
+            "email": "13662321894@163.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "edmmss\\extension\\VCode\\": "src/"
+        }
+    }
+}
