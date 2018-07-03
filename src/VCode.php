@@ -20,9 +20,9 @@ class VCode
 {
     private $vcode = null;// 验证码
     private $img = null;// 验证码图片
-    private $width = 130;// 宽度
-    private $height = 35;// 高度
-    private $count = 5;// 个数
+    private $width = 300;// 宽度
+    private $height = 100;// 高度
+    private $count = 6;// 个数
     private $bgimg = null;// 背景图片
     private $type = "gif";// 返回的图片格式gif jpg png
     private $str = 2;// 字符串组合类型  0纯数字   1纯字母  2混合
@@ -30,11 +30,24 @@ class VCode
     private $code = "0123456789qwertyuipasdfghjkzxcvbnmQWERTYUIPASDFGHJKLZXCVBNM";// 随机因子(近似的已删除)
     private $pmarr = ["width", "height", "count", "bgimg", "type", "str", "fontfiles", "point", "arc"];
     private $rgb = [];// 随机颜色
-    private $point = 15;// 每15平方像素一个干扰点
-    private $arc = 400;// 每400平方像素-个干扰弧线
+    private $point = 1.8;// 每15平方像素一个干扰点
+    private $arc = 1;// 每400平方像素-个干扰弧线
+
+    const DEFAULT_TTF_ARRAY = [
+        'segoescb.ttf',
+        'Action_Jackson_Font_by_OhMyCraazyEditions.ttf',
+        'Delicious-Bold.otf',
+        'Delicious-BoldItalic.otf',
+        'Delicious-Heavy.otf',
+        'Delicious-Italic.otf',
+        'Delicious-Roman.otf',
+        'Delicious-SmallCaps.otf',
+        'miso.otf',
+        'MISO-BOL.OTF',
+    ];
 
     // 构造方法
-    function __construct()
+    public function __construct()
     {
 
     }
@@ -52,11 +65,22 @@ class VCode
         if (empty($arr)) {
             return false;
         }
+
         foreach ($arr as $key => $val) {
             $key = strtolower($key);
             if (in_array($key, $this->pmarr)) {
                 $this->$key = $val;
             }
+        }
+
+        if (!$this->fontfiles) {
+            // 没有设置就用默认的
+            $fonts = [];
+            $fontsPath = $this->getFontsPath();
+            foreach (self::DEFAULT_TTF_ARRAY as $value) {
+                $fonts[] = $fontsPath . $value;
+            }
+            $this->fontfiles = $fonts;
         }
     }
 
@@ -82,7 +106,7 @@ class VCode
      * @author edmmss
      * @return null
      */
-    function getCode()
+    public function getCode()
     {
         $this->makeCode();// 生成验证码
 
@@ -95,7 +119,7 @@ class VCode
      * @date   2018/7/3
      * @author edmmss
      */
-    function getImg()
+    public function getImg()
     {
         $this->randColor();// 随机色
         $this->createImg();// 创建背景
