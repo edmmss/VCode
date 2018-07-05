@@ -1,6 +1,6 @@
 <?php
 
-namespace edmmss\extension\VCode;
+namespace Edmmss\Extension\Vcode;
 
 /**
  * 13662321894@163.com
