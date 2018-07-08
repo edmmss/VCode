@@ -13,7 +13,7 @@
     "require": {},
     "autoload": {
         "psr-4": {
-            "edmmss\\extension\\VCode\\": "src/"
+            "Edmmss\\Extension\\Vcode\\": "src/"
         }
     }
 }
